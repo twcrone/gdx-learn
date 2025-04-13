@@ -8,8 +8,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ActorBase extends Actor {
-    private TextureRegion textureRegion;
-    private Rectangle rectangle;
+    private final TextureRegion textureRegion;
+    private final Rectangle rectangle;
 
     public ActorBase() {
         super();
