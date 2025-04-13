@@ -2,40 +2,29 @@ package io.twcrone.gdxlearn;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class WizardGame extends Game {
 
-    private SpriteBatch batch;
-    private Texture turtleTexture;
-    private float turtleX;
-    private float turtleY;
-    private Rectangle turtleRectangle;
-    private Texture starfishTexture;
-    private float starfishX;
-    private float starfishY;
-    private Rectangle starfishRectangle;
-//    private Texture oceanTexture;
-//    private Texture winMessageTexture;
+    private Stage mainStage;
+    private Wizard wizard;
+    private ActorBase dragon;
     private boolean win;
 
     @Override
     public void create() {
-        batch = new SpriteBatch();
-        turtleTexture = new Texture( Gdx.files.internal("assets/wizard.png") );
-        turtleX = 20;
-        turtleY = 20;
-        turtleRectangle = new Rectangle( turtleX, turtleY,
-            turtleTexture.getWidth(), turtleTexture.getHeight() );
-        starfishTexture = new Texture( Gdx.files.internal("assets/dragon.png") );
-        starfishX = 380;
-        starfishY = 380;
-        starfishRectangle = new Rectangle( starfishX, starfishY,
-            starfishTexture.getWidth(), starfishTexture.getHeight() );
+        mainStage = new Stage();
+        this.wizard = new Wizard();
+        wizard.setTexture(new Texture( Gdx.files.internal("assets/wizard.png")));
+        wizard.setPosition(20, 20);
+        mainStage.addActor(wizard);
+
+        dragon = new ActorBase();
+        dragon.setTexture(new Texture( Gdx.files.internal("assets/dragon.png")));
+        dragon.setPosition(380, 380);
+        mainStage.addActor(dragon);
         //oceanTexture = new Texture( Gdx.files.internal("assets/water.jpg") );
         //winMessageTexture = new Texture( Gdx.files.internal("assets/you-win.png") );
         win = false;
@@ -45,30 +34,17 @@ public class WizardGame extends Game {
     public void render()
     {
         // check user input
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            turtleX--;
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            turtleX++;
-        if (Gdx.input.isKeyPressed(Input.Keys.UP))
-            turtleY++;
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            turtleY--;
-        // update turtle rectangle location
-        turtleRectangle.setPosition(turtleX, turtleY);
+        mainStage.act(1/60f);
         // check win condition: turtle must be overlapping starfish
-        if (turtleRectangle.overlaps(starfishRectangle))
-            win = true;
+        if (wizard.overlaps(dragon))
+        {
+            dragon.remove();
+  //          winMessage.setVisible(true);
+        }
         // clear screen
         Gdx.gl.glClearColor(0,0,0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // draw graphics
-        batch.begin();
-//        batch.draw( oceanTexture, 0, 0 );
-        if (!win)
-            batch.draw( starfishTexture, starfishX, starfishY );
-        batch.draw( turtleTexture, turtleX, turtleY );
-//        if (win)
-//            batch.draw( winMessageTexture, 180, 180 );
-        batch.end();
+        mainStage.draw();
     }
 }
