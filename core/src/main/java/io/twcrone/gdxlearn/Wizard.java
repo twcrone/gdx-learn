@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 public class Wizard extends ActorBase{
-    public Wizard() {
-        super();
+    public Wizard(float x, float y) {
+        super(x, y);
     }
 
     public void act(float dt) {

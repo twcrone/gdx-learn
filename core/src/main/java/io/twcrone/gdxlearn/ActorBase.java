@@ -2,6 +2,7 @@ package io.twcrone.gdxlearn;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,11 +11,18 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class ActorBase extends Actor {
     private final TextureRegion textureRegion;
     private final Rectangle rectangle;
+    private Animation<TextureRegion> animation;
+    private float elapsedTime;
+    private boolean animationPaused;
 
-    public ActorBase() {
+    public ActorBase(float x, float y) {
         super();
+        setPosition(x, y);
         textureRegion = new TextureRegion();
         rectangle = new Rectangle();
+        animation = null;
+        elapsedTime = 0;
+        animationPaused = false;
     }
 
     public void setTexture(Texture t) {

@@ -22,14 +22,12 @@ public class WizardGame extends GameBase {
 
     @Override
     public void initialize() {
-        this.wizard = new Wizard();
+        this.wizard = new Wizard(20, 20);
         wizard.setTexture(new Texture( Gdx.files.internal("assets/wizard.png")));
-        wizard.setPosition(20, 20);
         mainStage.addActor(wizard);
 
-        dragon = new ActorBase();
+        dragon = new ActorBase(380, 380);
         dragon.setTexture(new Texture( Gdx.files.internal("assets/dragon.png")));
-        dragon.setPosition(380, 380);
         mainStage.addActor(dragon);
         win = false;
     }
