@@ -22,8 +22,7 @@ public class WizardGame extends GameBase {
 
     @Override
     public void initialize() {
-        this.wizard = new Wizard(20, 20);
-        wizard.setTexture(new Texture( Gdx.files.internal("assets/wizard.png")));
+        this.wizard = new Wizard(100, 100);
         mainStage.addActor(wizard);
 
         dragon = new ActorBase(380, 380);

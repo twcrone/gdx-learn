@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 public class Wizard extends ActorBase{
     public Wizard(float x, float y) {
         super(x, y);
+        loadAnimationFromSheet("assets/wizard/Idle.png", 1, 6, 0.1f, true);
     }
 
     public void act(float dt) {
